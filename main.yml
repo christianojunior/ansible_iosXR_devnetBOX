@@ -1,0 +1,32 @@
+---
+- hosts:  cisco
+  gather_facts: no
+  tasks:
+  - name: Realizando backup da running-config...
+    cisco.ios.ios_config:
+     backup: yes
+     backup_options:
+        filename: "{{inventory_hostname}}_bkp.cfg"
+        dir_path: ./backup
+    tags:
+    - backup
+    - basic_port_config
+  
+  - name: Realizando rollback das configurações
+    cisco.ios.ios_config:
+      src:  ./backup/{{inventory_hostname}}_bkp.cfg
+      replace: config
+      backup: yes
+    tags: rollback
+
+  - name: Configure GigabitEthernet0/0/0/0
+    cisco.iosxr.iosxr_command:
+     commands:
+     - configure terminal
+     - interface {{interface}}
+     - ip address {{gb1_ip}} {{gb1_mask}}
+     - no shutdown
+     - commit
+     - end
+    tags: basic_port_config
+  
