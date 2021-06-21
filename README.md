@@ -6,7 +6,7 @@ O laboratorio devnet utilizado foi: https://devnetsandbox.cisco.com/RM/Diagram/I
 A unica dependencia desse script realmente é o ansible, que pode ser facilmente instalado com um\
 ```sudo package-manager install ansible -y```\
 Para executar o script o comando é\
-```ansible-playbook ./main.yml --tags=basic_port_config --extra-vars "interface=nome da interface alvo ip=ip a ser configurado mask=mascara a ser configurada"```\
+``ansible-playbook -i inventory ./main.yml --tags=basic_port_config --extra-vars "interface=nome da interface alvo ip=ip a ser configurado mask=mascara a ser configurada"``\
 O comando acima realizara um backup da configuração atual e só então realizará as mudanças, você também pode rodar\
-```ansible-playbook ./main.yml --tags=backup```\
-Para realizar somente o backup.
+``ansible-playbook -i inventory ./main.yml --tags=backup``
+\Para realizar somente o backup.
