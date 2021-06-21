@@ -4,6 +4,8 @@ O laboratorio devnet utilizado foi: https://devnetsandbox.cisco.com/RM/Diagram/I
 É neccessario reserva-la, você pode reserva-la por até uma semana, geralmente se leva 10 minutos para a configuração da mesma terminar, você receberá um email com o endereço do servidor vpn da box(você precisa se conectar a vpn provida para poder acessar o laboratorio), login e senha.
 ## Execução do script
 A unica dependencia desse script realmente é o ansible, que pode ser facilmente instalado com um\
-```sudo package-manager install ansible -y```
+```sudo package-manager install ansible -y```\
 Para executar o script o comando é\
-```ansible-playbook ./main.yml --tags=basic_port_config --extra-vars "interface=nome da interface alvo ip=ip a ser configurado mask=mascara a ser configurada"```
+```ansible-playbook ./main.yml --tags=basic_port_config --extra-vars "interface=nome da interface alvo ip=ip a ser configurado mask=mascara a ser configurada"```\
+O comando acima realizara um backup da configuração atual e só então realizará as mudanças, você também pode rodar 
+```ansible-playbook ./main.yml --tags=backup```
